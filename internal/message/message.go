@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/eng-nakamura-tetsu/sqssample/aws/internal/pkg/cloud"
+	"github.com/eng-nakamura-tetsu/sqssample/internal/pkg/cloud"
 )
 
 func Message(client cloud.MessageClient) {

@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sqs"
-	"github.com/eng-nakamura-tetsu/sqssample/aws/internal/pkg/cloud"
+	"github.com/eng-nakamura-tetsu/sqssample/internal/pkg/cloud"
 )
 
 var _ cloud.MessageClient = SQS{}

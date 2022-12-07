@@ -4,8 +4,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/eng-nakamura-tetsu/sqssample/aws/internal/message"
-	"github.com/eng-nakamura-tetsu/sqssample/aws/internal/pkg/cloud/aws"
+	"github.com/eng-nakamura-tetsu/sqssample/internal/message"
+	"github.com/eng-nakamura-tetsu/sqssample/internal/pkg/cloud/aws"
 )
 
 func main() {
