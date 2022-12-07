@@ -1,0 +1,14 @@
+version: '3'
+services:
+  localstack:
+    image: localstack/localstack:latest
+    environment:
+      - SERVICES=sqs,s3,dynamodb,lambda,secretsmanager,logs # 使いたいAWSサービスカンマ区切りで設定する
+      - DEFAULT_REGION=ap-northeast-1 # リージョンを設定
+      - DATA_DIR=/var/lib/localstack # データ保存するディレクトリ
+      - USER=root
+    volumes:
+      - ~/dev/localstack:/var/lib/localstack # ローカルディレクトリをデータ保存ディレクトリへマウント
+    ports:
+      - 4566:4566 # サービスへのアクセスポートは4566
+      - 4567-4584:4567-4584
