@@ -1,26 +1,33 @@
 package main
 
 import (
-	"log"
-	"time"
-
-	"github.com/eng-nakamura-tetsu/sqssample/internal/message"
-	"github.com/eng-nakamura-tetsu/sqssample/internal/pkg/cloud/aws"
+	adaptor "sqssample/adapter"
 )
 
 func main() {
-	// Create a session instance.
-	ses, err := aws.New(aws.Config{
-		Address: "http://localhost:4566",
-		Region:  "eu-west-1",
-		Profile: "localstack",
-		ID:      "test",
-		Secret:  "test",
-	})
+	// 省略
+}
+
+const queueName = "prepared"
+
+func SendMessageToSQS(s *adaptor.Adapter, message string) error {
+	err := s.Enqueue(queueName, message)
 	if err != nil {
-		log.Fatalln(err)
+		return err
+	}
+	return nil
+}
+
+func ReceiveMessageFromSQS(s *adaptor.Adapter) (string, error) {
+	messages, err := s.Dequeue(queueName)
+	if err != nil {
+		return "", err
 	}
 
-	// Test message
-	message.Message(aws.NewSQS(ses, time.Second*5))
+	if len(messages) == 0 {
+		return "", nil
+	}
+
+	message := *messages[0].Body
+	return message, nil
 }
