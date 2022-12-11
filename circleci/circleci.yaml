@@ -1,0 +1,24 @@
+version: 2.1
+jobs:
+  run-test:
+    docker:
+      - image: cimg/go:1.18
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+      - image: localstack/localstack:1.0.0
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - checkout
+      - run:
+          command: sudo apt-get update && sudo apt install python3-pip && sudo pip3 install awscli
+      - run:
+          command: aws sqs create-queue --queue-name prepared --region ap-northeast-1 --endpoint http://localhost:4566
+      - run:
+          command: go test ./src/main/... -v
+workflows:
+  integration-test:
+    jobs:
+      - run-test
