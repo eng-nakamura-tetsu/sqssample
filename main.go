@@ -1,7 +1,7 @@
 package main
 
 import (
-	adaptor "sqssample/adapter"
+	"sqssample/adaptor"
 )
 
 func main() {
